@@ -5,7 +5,9 @@ logger = logging.getLogger('tictactoe')
 
 
 def make_empty_board() -> List[List[str]]:
-	return [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+	return [[' ', ' ', ' '], 
+		[' ', ' ', ' '], 
+		[' ', ' ', ' ']]
 
 
 def show_board(input_board: List[List[str]]):
@@ -15,28 +17,28 @@ def show_board(input_board: List[List[str]]):
 
 def receive_input(input_board: List[List[str]], turn: str) -> (int, int):
 	while True:
-		r = input("input row index: ")
-		c = input("input col index: ")
-		if not r.isdigit() or not c.isdigit():
-			logger.error('{turn} input invalid: {r},{c}'.format(turn=turn, r=r, c=c))
+		row = input("input row index: ")
+		col = input("input col index: ")
+		if not row.isdigit() or not col.isdigit():
+			logger.error('{turn} input invalid: {row},{col}'.format(turn=turn, row=row, col=col))
 			print('input invalid, not int')
-		elif int(r) < 0 or int(r) > 2 or int(c) < 0 or int(c) > 2:
-			logger.error('{turn} input invalid: {r},{c}'.format(turn=turn, r=r, c=c))
+		elif int(row) < 0 or int(row) > 2 or int(col) < 0 or int(col) > 2:
+			logger.error('{turn} input invalid: {row},{col}'.format(turn=turn, row=row, col=col))
 			print('input invalid, should >=0 and <=2')
-		elif input_board[int(r)][int(c)] != ' ':
-			logger.error('{turn} input invalid: {r},{c}'.format(turn=turn, r=r, c=c))
+		elif input_board[int(row)][int(col)] != ' ':
+			logger.error('{turn} input invalid: {row},{col}'.format(turn=turn, row=row, col=col))
 			print('input invalid, index already input')
 		else:
-			logger.info('received {turn} input: {r},{c}'.format(turn=turn, r=r, c=c))
-			return int(r), int(c)
+			logger.info('received {turn} input: {row},{col}'.format(turn=turn, row=row, col=col))
+			return int(row), int(col)
 
 
-def change_turn(old: str) -> str:
-	if old == 'X':
-		new = 'Y'
+def change_turn(now: str) -> str:
+	if now == 'X':
+		next = 'Y'
 	else:
-		new = 'X'
-	return new
+		next = 'X'
+	return next
 
 
 def judge_winner(input_board: List[List[str]]) -> bool:
