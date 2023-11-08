@@ -15,8 +15,8 @@ if __name__ == '__main__':
 	logic.show_board(board)
 	while True:
 		print('Next turn: ', turn)
-		r, c = logic.receive_input(board, turn)
-		board[r][c] = turn
+		row, col = logic.receive_input(board, turn)
+		board[row][col] = turn
 		logic.show_board(board)
 		turn = logic.change_turn(turn)
 		if logic.judge_winner(board):
